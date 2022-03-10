@@ -51,8 +51,6 @@ public class Main {
             System.out.println("Voce nao pode participar dessa modalidade, por favor tente novamente!");
         }
 
-        System.out.println(p.getCircuit());
-
         String priceCircuit = calculatePrice(p.getCircuit(), p.getAge());
         p.setPriceCircuit(priceCircuit);
 
@@ -65,6 +63,7 @@ public class Main {
         System.out.println("---- MENU PRINCIPAL ----");
         System.out.println("1: Cadastrar uma pessoa.");
         System.out.println("2: Listar competidores.");
+        System.out.println("3: Remover competidor.");
         System.out.println("0: Sair");
 
         select = scanner.nextInt();
@@ -83,7 +82,7 @@ public class Main {
             switch (control) {
                 case 1 : {
                     People people = createPeople(scanner);
-                    System.out.println(people.getName());
+                    
                     if(people == null) {
                         break;
                     }
@@ -94,8 +93,20 @@ public class Main {
                 case 2: {
                     listPeoples.entrySet().forEach(entry -> {
                         People p = entry.getValue();
-                        System.out.println("O participante " + p.getName() + " " + p.getLastName() + " vai particpar do circuito " + p.getCircuit() + " o valor dessa modalidade e de " + p.getPriceCircuit() );
+                        System.out.println("O competidor " + p.getName() + " " + p.getLastName() + " vai participar do circuito " + p.getCircuit() + " eh o valor dessa modalidade e de " + p.getPriceCircuit());
                     });
+                    break;
+                }
+                case 3: {
+                    System.out.println("Digite o codigo do participante: ");
+                    int key = scanner.nextInt();
+                    People p = listPeoples.remove(key);
+
+                    if(p == null) {
+                        System.out.println("Participante ja foi removido.");
+                    } else {
+                        System.out.println("Participante removido com sucesso!");
+                    }
                     break;
                 }
                 case 0: {
