@@ -1,26 +1,25 @@
 package com.company;
 
-public class People {
+import java.math.BigDecimal;
+
+enum TypeCircuit {
+    PEQUENO, MEDIO, AVANCADO
+}
+
+
+
+public class Participant {
     String rg;
     String name;
     String lastName;
     int age;
-    String circuit;
+    TypeCircuit circuit;
     String phoneNumber;
-    String priceCircuit;
     String emergencyPhoneNumber;
     String bloodType;
 
     public String getRg() {
         return rg;
-    }
-
-    public String getPriceCircuit() {
-        return priceCircuit;
-    }
-
-    public void setPriceCircuit(String priceCircuit) {
-        this.priceCircuit = priceCircuit;
     }
 
     public void setRg(String rg) {
@@ -51,11 +50,11 @@ public class People {
         this.age = age;
     }
 
-    public String getCircuit() {
+    public TypeCircuit getCircuit() {
         return circuit;
     }
 
-    public void setCircuit(String circuit) {
+    public void setCircuit(TypeCircuit circuit) {
         this.circuit = circuit;
     }
 

@@ -1,37 +1,38 @@
 package com.company;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 public class Main {
 
-    public static String calculatePrice(String typeCircuit, int age) {
-        String priceCircuit = "";
+    public static Integer calculatePrice(String typeCircuit, int age) {
+        Integer priceCircuit;
 
         switch (typeCircuit) {
-            case "pequeno": {
+            case "PEQUENO": {
                 if(age < 18) {
-                    priceCircuit = "R$ 1.300";
+                    priceCircuit = 1300;
                 } else {
-                    priceCircuit = "R$ 1.500";
+                    priceCircuit = 1500;
                 }
                 break;
-            } case "medio": {
+            } case "MEDIO": {
                 if (age < 18) {
-                    priceCircuit = "R$ 2.000";
+                    priceCircuit = 2000;
                 } else {
-                    priceCircuit = "R$ 2.300";
+                    priceCircuit = 2300;
                 }
                 break;
             } default: {
-                priceCircuit = "R$ 2.8000";
+                priceCircuit = 28000;
             }
         }
 
         return  priceCircuit;
     }
 
-    public static People createPeople(Scanner scanner) {
-        People p = new People();
+    public static Participant createPeople(Scanner scanner) {
+        Participant p = new Participant();
         System.out.println("Digite nome: ");
         p.setName(scanner.next());
         System.out.println("Digite o sobrenome: ");
@@ -45,14 +46,11 @@ public class Main {
         System.out.println("Digite o tipo sanguineo: ");
         p.setBloodType(scanner.next());
         System.out.println("Digite o circuito [pequeno, medio, avancado]: ");
-        p.setCircuit(scanner.next());
+        p.setCircuit(TypeCircuit.valueOf(scanner.next().toUpperCase(Locale.ROOT)));
 
         if(p.getAge() < 18 && p.getCircuit().equals("avancado")) {
             System.out.println("Voce nao pode participar dessa modalidade, por favor tente novamente!");
         }
-
-        String priceCircuit = calculatePrice(p.getCircuit(), p.getAge());
-        p.setPriceCircuit(priceCircuit);
 
         return p;
     }
@@ -70,10 +68,9 @@ public class Main {
         return select;
     }
 
-
     public static void main(String[] args) {
         int globaKey = 0;
-        HashMap<Integer, People> listPeoples = new HashMap<Integer, People>();
+        HashMap<Integer, Participant> listParcipants = new HashMap<Integer, Participant>();
         Scanner scanner = new Scanner(System.in);
         int control = 0;
 
@@ -81,26 +78,27 @@ public class Main {
             control = menu(scanner);
             switch (control) {
                 case 1 : {
-                    People people = createPeople(scanner);
+                    Participant participant = createPeople(scanner);
                     
-                    if(people == null) {
+                    if(participant == null) {
                         break;
                     }
-                    listPeoples.put(globaKey, people);
+                    listParcipants.put(globaKey, participant);
                     globaKey++;
                     break;
                }
                 case 2: {
-                    listPeoples.entrySet().forEach(entry -> {
-                        People p = entry.getValue();
-                        System.out.println("O competidor " + p.getName() + " " + p.getLastName() + " vai participar do circuito " + p.getCircuit() + " eh o valor dessa modalidade e de " + p.getPriceCircuit());
+                    listParcipants.entrySet().forEach(entry -> {
+                        Participant p = entry.getValue();
+                        Integer price = calculatePrice(String.valueOf(p.getCircuit()), p.getAge());
+                        System.out.println("O participante " + p.getName() + " " + p.getLastName() + " vai participar do circuito " + p.getCircuit() + " eh o valor dessa modalidade e de " + price);
                     });
                     break;
                 }
                 case 3: {
                     System.out.println("Digite o codigo do participante: ");
                     int key = scanner.nextInt();
-                    People p = listPeoples.remove(key);
+                    Participant p = listParcipants.remove(key);
 
                     if(p == null) {
                         System.out.println("Participante ja foi removido.");
