@@ -13,8 +13,8 @@ public class ClientController {
         this.repository = repository;
     }
 
-    public void create(Client client) {
-        repository.create(client);
+    public Client create(Client client) {
+        return repository.create(client);
     }
 
     public List<Client> findAll() {

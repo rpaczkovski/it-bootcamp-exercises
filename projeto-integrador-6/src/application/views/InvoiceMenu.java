@@ -56,7 +56,7 @@ public class InvoiceMenu {
                         System.out.print("Digite o sobrenome: ");
                         String surname = scanner.next();
 
-                        clientController.create(new Client(clientId, name, surname));
+                        client = clientController.create(new Client(clientId, name, surname));
                     }
 
                     System.out.print("Digite o codigo do produto: ");
