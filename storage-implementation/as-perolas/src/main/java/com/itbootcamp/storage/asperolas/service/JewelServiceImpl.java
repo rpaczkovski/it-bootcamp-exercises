@@ -1,7 +1,7 @@
 package com.itbootcamp.storage.asperolas.service;
 
 import com.itbootcamp.storage.asperolas.entity.Jewel;
-import com.itbootcamp.storage.asperolas.execption.NotFoundJewelException;
+import com.itbootcamp.storage.asperolas.exception.NotFoundJewelException;
 import com.itbootcamp.storage.asperolas.repository.JewelRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
