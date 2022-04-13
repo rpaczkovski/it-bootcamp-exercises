@@ -20,7 +20,7 @@ public class ArticleController {
     }
 
     @GetMapping
-    private List<Article> getAll(@RequestParam(required = false) String title) {
+    private @ResponseBody List<Article> getAll(@RequestParam(required = false) String title) {
         if(title != null) {
             return service.findByTitle(title);
         }
